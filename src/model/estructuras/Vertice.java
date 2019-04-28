@@ -27,6 +27,10 @@ public class Vertice<K, V> {
 		infoVertice = pInf;
 	}
 	
+	public void setId(K pId){
+		id = pId;
+	}
+	
 	public int darNumeroArcos(){
 		return numeroArcos;
 	}

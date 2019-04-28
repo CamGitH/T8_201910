@@ -25,7 +25,7 @@ public class GrafoTest<A, K, V> extends TestCase{
 	public void setupEscenario1( )
 	{
 		// Crear el grafo vacio
-		grafo = new Graph<>();
+		grafo = new Graph<Integer, Integer, Integer>();
 
 		// Crear los vértices
 		try
@@ -51,17 +51,21 @@ public class GrafoTest<A, K, V> extends TestCase{
 	public void setupEscenario2( )
 	{
 		// Crear el grafo vacio
-		grafo = new Graph<>();
+		grafo = new Graph<Integer, Integer, Integer>();
 
 		// Crear los vértices
 		try
 		{
-
+			System.out.println(grafo.V());
 			grafo.addVertex(1, 1);
+			System.out.println(grafo.getInfoVertex(1)+"sii");
 			grafo.addVertex(2, 2);
+			System.out.println("sii");
 			grafo.addVertex(3, 3);
 			grafo.addVertex(4, 4);
+			System.out.println("aaa");
 			grafo.addVertex(5, 5);
+			System.out.println(grafo.getInfoVertex(1)+"");
 
 		}
 		catch( Exception e )

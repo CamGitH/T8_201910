@@ -12,9 +12,9 @@ public class Graph<K,V,A> implements IGraph<K, V, A> {
 	//numero de arcos
 	int e;
 
-	ArrayList<Vertice<K, V>> nodos;
+	ArrayList<Vertice<K, V>> nodos = new ArrayList<>();
 
-	ArrayList<Arco<K, V, A>> arcos;
+	ArrayList<Arco<K, V, A>> arcos = new ArrayList<>();
 
 
 	/*
@@ -23,6 +23,8 @@ public class Graph<K,V,A> implements IGraph<K, V, A> {
 	public void graph() {
 		v =0;
 		e =0;
+		nodos = null;
+		arcos = null;
 	}
 
 	/*
@@ -46,14 +48,17 @@ public class Graph<K,V,A> implements IGraph<K, V, A> {
 	public void addVertex(K idVertex, V infoVertex) {
 		if(v==0){
 			Vertice<K, V> a = new Vertice<>();
-			a.vertice(idVertex, infoVertex);
+			a.cambiarInfo(infoVertex);
+			a.setId(idVertex);
 			v++;
 			raiz=a;
 			nodos.add(a);
+			
 		}
 		else{
 		Vertice<K, V> a = new Vertice<>();
-		a.vertice(idVertex, infoVertex);
+		a.cambiarInfo(infoVertex);
+		a.setId(idVertex);
 		v++;	
 		nodos.add(a);
 		}
