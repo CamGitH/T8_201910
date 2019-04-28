@@ -1,5 +1,6 @@
 package model.estructuras;
 
+import java.util.ArrayList;
 import java.util.Iterator;
 
 public interface IGraph<K, V, A> {
@@ -22,5 +23,5 @@ public interface IGraph<K, V, A> {
 	
 	void setInfoArc(K idVertexIni, K idVertexFin, A infoArc);
 	
-	Iterator<K> adj(K idVertex);
+	ArrayList<K> adj(K idVertex);
 }

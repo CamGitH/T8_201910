@@ -19,6 +19,13 @@ public class Vertice<K, V> {
 		return id;
 	}
 	
+	public V darInfo(){
+		return infoVertice;
+	}
+	
+	public void cambiarInfo(V pInf){
+		infoVertice = pInf;
+	}
 	
 	public int darNumeroArcos(){
 		return numeroArcos;
