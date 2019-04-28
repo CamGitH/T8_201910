@@ -46,15 +46,17 @@ public class Graph<K,V,A> implements IGraph<K, V, A> {
 	public void addVertex(K idVertex, V infoVertex) {
 		if(v==0){
 			Vertice<K, V> a = new Vertice<>();
-			a.vertice(infoVertex, idVertex);
+			a.vertice(idVertex, infoVertex);
 			v++;
 			raiz=a;
 			nodos.add(a);
 		}
+		else{
 		Vertice<K, V> a = new Vertice<>();
-		a.vertice(infoVertex, idVertex);
+		a.vertice(idVertex, infoVertex);
 		v++;	
 		nodos.add(a);
+		}
 	}
 
 	/*

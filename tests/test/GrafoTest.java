@@ -51,7 +51,7 @@ public class GrafoTest<A, K, V> extends TestCase{
 	public void setupEscenario2( )
 	{
 		// Crear el grafo vacio
-		grafo = new Graph();
+		grafo = new Graph<>();
 
 		// Crear los vértices
 		try
