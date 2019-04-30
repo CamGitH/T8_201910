@@ -14,7 +14,7 @@ public class Graph<K,V,A> implements IGraph<K, V, A> {
 
 	ArrayList<Vertice<K, V>> nodos = new ArrayList<>();
 
-	ArrayList<Arco<K, V, A>> arcos = new ArrayList<>();
+	ArrayList<Arco<K, K, A>> arcos = new ArrayList<>();
 
 
 	/*
@@ -45,7 +45,7 @@ public class Graph<K,V,A> implements IGraph<K, V, A> {
 	 * Adiciona un vértice con un Id único.
 	 * El vértice tiene la información InfoVertex
 	 */
-	public void addVertex(K idVertex, V infoVertex) {
+	public void addVertex(K idVertex, V infoVertex) throws Exception {
 		if(v==0){
 			Vertice<K, V> a = new Vertice<>();
 			a.cambiarInfo(infoVertex);
@@ -56,6 +56,9 @@ public class Graph<K,V,A> implements IGraph<K, V, A> {
 			
 		}
 		else{
+			if(getInfoVertex(idVertex)!=null){
+				throw new Exception("ya existe");
+			}
 		Vertice<K, V> a = new Vertice<>();
 		a.cambiarInfo(infoVertex);
 		a.setId(idVertex);
@@ -69,7 +72,7 @@ public class Graph<K,V,A> implements IGraph<K, V, A> {
 	 * el vertice IdVertexFin. El arco tiene la información infoArc
 	 */
 	public void addEdge(K idVertexIni, K idVertexFin, A infoArc) {
-		Arco<K, V, A> a = new Arco(idVertexIni, idVertexFin, infoArc);
+		Arco<K, K, A> a = new Arco(idVertexIni, idVertexFin, infoArc);
 		e++;	
 		arcos.add(a);
 	}
@@ -79,7 +82,7 @@ public class Graph<K,V,A> implements IGraph<K, V, A> {
 	 */
 	public V getInfoVertex(K idVertex) {
 		for(int cont =0; cont<=v; cont ++){
-			if(nodos.get(cont)== idVertex){
+			if(nodos.get(cont).darID()== idVertex){
 				return nodos.get(cont).darInfo();
 			}
 		}
