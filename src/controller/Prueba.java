@@ -4,6 +4,9 @@ import javax.xml.parsers.*;
 import org.xml.sax.*;
 import org.xml.sax.helpers.*;
 
+import model.estructuras.ArregloDinamico;
+import model.estructuras.Vertecss;
+
 import java.util.*;
 import java.io.*;
 
@@ -11,11 +14,17 @@ import java.io.*;
 //https://docs.oracle.com/javase/tutorial/jaxp/sax/parsing.html
 
 public class Prueba extends DefaultHandler {
-
-	private Hashtable tags;
+	
+	private LinkedList<Vertecss> listaVertices = new LinkedList<Vertecss>();
+	
+	private LinkedList<ArregloDinamico> listaArcos  = new LinkedList<ArregloDinamico>();
+	
+	private ArregloDinamico arrayLongs  = new ArregloDinamico<>(10);
+	
+	
 
 	static public void main(String[] args) throws Exception{
-		String filename = "./data/Central-WashingtonDC-OpenStreetMap.xml";
+		String filename = "./data/XMLs/Central-WashingtonDC-OpenStreetMap.xml";
 		
 		SAXParserFactory spf = SAXParserFactory.newInstance();
 		spf.setNamespaceAware(true);
@@ -28,52 +37,33 @@ public class Prueba extends DefaultHandler {
 
 	
 	public void startDocument() throws SAXException {
-		tags = new Hashtable();
+
 	}
 
-	int v = 0;
-	int a = 0;
+	int n =0;
 	@Override
 	public void startElement(String namespaceURI, String localName, String qName, Attributes atts) throws SAXException {
 
-		String key = localName;
-		Object value = tags.get(key);
-		
-
-		if (value == null) {
-			tags.put(key, new Integer(1));
-			
-		} else {
-			int count = ((Integer) value).intValue();
-			count++;
-			tags.put(key, new Integer(count));
-		}
-		
 		boolean sirve = false;
-		String s = "";
-		if(key.equals("way")) {
-			s.concat("IDway "+atts.getValue(0)+" Camino de nodos:");
-		}
 		
 		if(qName.equals("nd")){
-			s.concat(atts.getValue(0));
+			long x = Long.parseLong(atts.getValue(0));
+			arrayLongs.agregar(x);
 		}
 		if(qName.equals("tag")&&atts.getValue(0).equals("highway")){
-			a+=1;
-			s.concat(atts.getValue(0)+"arco#"+a);
 			sirve = true;
 		}
 		if(sirve){
-			System.out.println(s);
+			listaArcos.add(arrayLongs);
+			for(int i = 0; i<arrayLongs.darTamano();i++){
+			arrayLongs.eliminar(i);
+			}
 		}
+		
+		
 		if(qName.equals("node")){
-			v+=1;
-			System.out.println("vertice#"+v);
-			System.out.println("ID "+atts.getValue(0));
-			System.out.println("LAT "+atts.getValue(1));
-			System.out.println("LON "+atts.getValue(2));
-			
-			//TODO Guardar el vertice
+			Vertecss vertice = new Vertecss(Double.parseDouble(atts.getValue(1)), Double.parseDouble(atts.getValue(2)), Long.parseLong(atts.getValue(0)));
+			listaVertices.add(vertice);
 		}
 	}
 	
@@ -84,12 +74,19 @@ public class Prueba extends DefaultHandler {
 	}
 
 	public void endDocument() throws SAXException {
-		Enumeration e = tags.keys();
+		System.out.println("Arcos"+listaArcos.size());
+		System.out.println("Vertices"+listaVertices.size()+"\n");
+		System.out.println(listaVertices.getLast().getId());
+		System.out.println(listaVertices.getLast().getLatitud());
+		System.out.println(listaVertices.getLast().getLongitud()+"\n");
+		System.out.println(listaArcos.getFirst().darElemento(0));
 		
-		for(Object o: tags.keySet()) {
-			String tag = (String) o;
-			int count = ((Integer) tags.get(tag)).intValue();
-			System.out.println("Local Name \"" + tag + "\" occurs " + count + " times");
-		}
+		
+		
 	}
+	
+	
+	
+	
+	
 }
