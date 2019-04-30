@@ -31,13 +31,14 @@ public class Prueba extends DefaultHandler {
 		tags = new Hashtable();
 	}
 
-	public boolean printedFirstNode = false;
-	
+	int v = 0;
+	int a = 0;
 	@Override
 	public void startElement(String namespaceURI, String localName, String qName, Attributes atts) throws SAXException {
 
 		String key = localName;
 		Object value = tags.get(key);
+		
 
 		if (value == null) {
 			tags.put(key, new Integer(1));
@@ -48,23 +49,31 @@ public class Prueba extends DefaultHandler {
 			tags.put(key, new Integer(count));
 		}
 		
-		if(key.equals("node")) {
-			//System.out.println("First node");
-			for(int n = 0; n < atts.getLength(); n++) {
-				//System.out.println(atts.getQName(n)+ ": " + atts.getValue(n));
-			}
-			//System.out.println();
-		
-		}
+		boolean sirve = false;
+		String s = "";
 		if(key.equals("way")) {
-			for(int n = 0; n < atts.getLength(); n++) {
-				if(atts.getValue(n).equals("highway")){
-					System.out.println(atts.getQName(n));
-					System.out.println("highway");
-				};
-			}
+			s.concat("IDway "+atts.getValue(0)+" Camino de nodos:");
+		}
 		
-		
+		if(qName.equals("nd")){
+			s.concat(atts.getValue(0));
+		}
+		if(qName.equals("tag")&&atts.getValue(0).equals("highway")){
+			a+=1;
+			s.concat(atts.getValue(0)+"arco#"+a);
+			sirve = true;
+		}
+		if(sirve){
+			System.out.println(s);
+		}
+		if(qName.equals("node")){
+			v+=1;
+			System.out.println("vertice#"+v);
+			System.out.println("ID "+atts.getValue(0));
+			System.out.println("LAT "+atts.getValue(1));
+			System.out.println("LON "+atts.getValue(2));
+			
+			//TODO Guardar el vertice
 		}
 	}
 	

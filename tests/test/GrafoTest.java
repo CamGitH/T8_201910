@@ -58,7 +58,7 @@ public class GrafoTest<A, K, V> extends TestCase{
 		{
 			System.out.println(grafo.V());
 			grafo.addVertex(1, 1);
-			System.out.println(grafo.getInfoVertex(1)+"sii");
+			System.out.println(grafo.getInfoVertex(1)+",   " +grafo.V());
 			grafo.addVertex(2, 2);
 			System.out.println("sii");
 			grafo.addVertex(3, 3);

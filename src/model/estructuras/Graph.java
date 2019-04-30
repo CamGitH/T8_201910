@@ -71,17 +71,21 @@ public class Graph<K,V,A> implements IGraph<K, V, A> {
 	 * Adiciona el arco No dirigido entre el vertice IdVertexIni y 
 	 * el vertice IdVertexFin. El arco tiene la información infoArc
 	 */
-	public void addEdge(K idVertexIni, K idVertexFin, A infoArc) {
+	public void addEdge(K idVertexIni, K idVertexFin, A infoArc) throws Exception {
+		if(getInfoArc(idVertexIni, idVertexFin)!=null){
+			throw new Exception("este arco ya existe");
+		}else{
 		Arco<K, K, A> a = new Arco(idVertexIni, idVertexFin, infoArc);
 		e++;	
 		arcos.add(a);
+		}
 	}
 
 	/*
 	 * Obtener la información de un vértice
 	 */
 	public V getInfoVertex(K idVertex) {
-		for(int cont =0; cont<=v; cont ++){
+		for(int cont =0; cont<=v-1; cont ++){
 			if(nodos.get(cont).darID()== idVertex){
 				return nodos.get(cont).darInfo();
 			}
@@ -93,7 +97,7 @@ public class Graph<K,V,A> implements IGraph<K, V, A> {
 	 * Modificar la información del vértice 
 	 */
 	public void setInfoVertex(K idVertex, V infoVertex) {
-		for(int cont =0; cont<=v; cont ++){
+		for(int cont =0; cont<=v-1; cont ++){
 			if(nodos.get(cont)== idVertex){
 				nodos.get(cont).cambiarInfo(infoVertex);
 			}
@@ -104,7 +108,7 @@ public class Graph<K,V,A> implements IGraph<K, V, A> {
 	 * Obtener la información de un arco
 	 */
 	public A getInfoArc(K idVertexIni, K idVertexFin) {
-		for(int cont =0; cont<=v; cont ++){
+		for(int cont =0; cont<=e-1; cont ++){
 			if(arcos.get(cont).darVerticeOrigen()==idVertexIni&&arcos.get(cont).darVerticeDestino()==idVertexFin){
 				return arcos.get(cont).darInfoArco();
 			}
@@ -116,7 +120,7 @@ public class Graph<K,V,A> implements IGraph<K, V, A> {
 	 *Modificar la información del arco entre los vértices idVertexIni e idVertexFin 
 	 */
 	public void setInfoArc(K idVertexIni, K idVertexFin, A infoArc) {
-		for(int cont =0; cont<=v; cont ++){
+		for(int cont =0; cont<=e-1; cont ++){
 			if(arcos.get(cont).darVerticeOrigen()==idVertexIni&&arcos.get(cont).darVerticeDestino()==idVertexFin){
 				arcos.get(cont).setInf(infoArc);
 			}
