@@ -41,6 +41,7 @@ public class Controller {
 			{
 			case 0:
 				try {
+					prueba.cargarTodo();
 					grafo = prueba.crearGrafo();
 				} catch (Exception e) {
 					e.printStackTrace();

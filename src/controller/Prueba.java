@@ -28,7 +28,14 @@ public class Prueba extends DefaultHandler {
 
 	private Graph grafo = new Graph<>();
 
-	static public void main(String[] args) throws Exception{
+	
+	
+	
+	public Prueba() {
+		super();
+	}
+
+	public void cargarTodo() throws Exception{
 		String filename = "./data/Central-WashingtonDC-OpenStreetMap.xml";
 
 		SAXParserFactory spf = SAXParserFactory.newInstance();
@@ -76,8 +83,8 @@ public class Prueba extends DefaultHandler {
 	}
 
 	public void endDocument() throws SAXException {
-		System.out.println("Arcos"+listaArcos.size());
-		System.out.println("Vertices"+listaVertices.size()+"\n");
+//		System.out.println("Arcos"+listaArcos.size());
+//		System.out.println("Vertices"+listaVertices.size()+"\n");
 //		System.out.println(listaVertices.getLast().getId());
 //		System.out.println(listaVertices.getLast().getLatitud());
 //		System.out.println(listaVertices.getLast().getLongitud()+"\n");
@@ -86,11 +93,10 @@ public class Prueba extends DefaultHandler {
 	}
 
 	public void creaVertices() throws Exception{
-		int tamano = listaVertices.size();
-		for(int i =0; i<tamano;i++){
+		for(int i = 0; i<listaVertices.size();i++){
 			grafo.addVertex(listaVertices.get(i).getId(), listaVertices.get(i).getLatitud(), listaVertices.get(i).getLongitud());
 		}
-		System.out.println(grafo.darListaNodos().getSize());
+		
 	}
 
 	public <A, K, V> void creaArcos() throws Exception{
@@ -105,9 +111,10 @@ public class Prueba extends DefaultHandler {
 	}
 
 	public <K, V, A> Graph<Long, Double, Double> crearGrafo() throws Exception{
-		Graph<Long, Double, Double> grafo = new Graph<>();
 		creaVertices();
 		creaArcos();
+		System.out.println(grafo.darListaArcos().getSize());
+		System.out.println(grafo.darListaNodos().getSize());
 		return grafo;
 	}
 }

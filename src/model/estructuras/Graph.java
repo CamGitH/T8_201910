@@ -18,21 +18,19 @@ public class Graph<K,V,A> implements IGraph<K, V, A> {
 
 
 	/*
-	 * constructor
+	 * retorna el numero de vertices
 	 */
-	public void graph() {
+	public int V() {
+		return v;
+	}
+
+	public Graph() {
 		v =0;
 		e =0;
 		nodos = null;
 		arcos = null;
 	}
 
-	/*
-	 * retorna el numero de vertices
-	 */
-	public int V() {
-		return v;
-	}
 
 	/*
 	 * retorna el numero de arcos
