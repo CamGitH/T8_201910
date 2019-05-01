@@ -23,6 +23,7 @@ public class Controller {
 
 		view = new View();
 		prueba = new Prueba();
+		grafo = new Graph();
 
 	}
 
