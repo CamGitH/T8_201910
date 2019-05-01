@@ -5,7 +5,9 @@ import org.xml.sax.*;
 import org.xml.sax.helpers.*;
 
 import model.estructuras.ArregloDinamico;
+import model.estructuras.Graph;
 import model.estructuras.Vertecss;
+import model.estructuras.Vertice;
 
 import java.util.*;
 import java.io.*;
@@ -85,8 +87,23 @@ public class Prueba extends DefaultHandler {
 		
 	}
 	
+	public <K, V, A> void creaVertices(Graph<Long, Double, Double> grafo, LinkedList<Vertecss> listaVertices) throws Exception{
+		int tamano = listaVertices.size();
+		for(int i =0; i<tamano;i++){
+			grafo.addVertex(listaVertices.get(i).getId(), listaVertices.get(i).getLatitud(), listaVertices.get(i).getLongitud());
+		}
+	}
 	
+	public <A, K, V> void creaArco(Graph<K, V, A> grafo, LinkedList<ArregloDinamico> listaArcos){
+		int tamano = listaArcos.size();
+		for(int i =0; i<tamano;i++){
+			Vertice<K, V> idVertexIni = grafo.getInfoVertex(grafo.getInfoVertex(idVertex));
+			grafo.addEdge(idVertexIni, idVertexFin, infoArc);
+		}
+	}
 	
-	
-	
+	public <K, V, A> Graph<K, V, A> crearGrafo(LinkedList<Vertecss> listaVertices,LinkedList<ArregloDinamico> listaArcos){
+		return null;
+		
+	}
 }

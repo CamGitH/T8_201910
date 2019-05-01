@@ -11,7 +11,7 @@ public interface IGraph<K, V, A> {
 	
 	int E();
 	
-	void addVertex( K idVertex, V infoVertex)throws Exception;
+	void addVertex(K idVertex, V infoVertex, V info2) throws Exception;
 	
 	void addEdge(K idVertexIni, K idVertexFin, A infoArc ) throws Exception;
 	

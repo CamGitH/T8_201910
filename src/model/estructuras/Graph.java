@@ -12,9 +12,9 @@ public class Graph<K,V,A> implements IGraph<K, V, A> {
 	//numero de arcos
 	int e;
 
-	ArrayList<Vertice<K, V>> nodos = new ArrayList<>();
+	LinkedList<Vertice<K, V>> nodos = new LinkedList<>();
 
-	ArrayList<Arco<K, K, A>> arcos = new ArrayList<>();
+	LinkedList<Arco<K, K, A>> arcos = new LinkedList<>();
 
 
 	/*
@@ -45,10 +45,11 @@ public class Graph<K,V,A> implements IGraph<K, V, A> {
 	 * Adiciona un vértice con un Id único.
 	 * El vértice tiene la información InfoVertex
 	 */
-	public void addVertex(K idVertex, V infoVertex) throws Exception {
+	public void addVertex(K idVertex, V infoVertex, V info2) throws Exception {
 		if(v==0){
 			Vertice<K, V> a = new Vertice<>();
 			a.cambiarInfo(infoVertex);
+			a.cambiarInfo2(info2);
 			a.setId(idVertex);
 			v++;
 			raiz=a;
@@ -86,8 +87,8 @@ public class Graph<K,V,A> implements IGraph<K, V, A> {
 	 */
 	public V getInfoVertex(K idVertex) {
 		for(int cont =0; cont<=v-1; cont ++){
-			if(nodos.get(cont).darID()== idVertex){
-				return nodos.get(cont).darInfo();
+			if(nodos.get(cont).darElemento().darID()== idVertex){
+				return nodos.get(cont).darElemento().darInfo();
 			}
 		}
 		return null;
@@ -99,7 +100,7 @@ public class Graph<K,V,A> implements IGraph<K, V, A> {
 	public void setInfoVertex(K idVertex, V infoVertex) {
 		for(int cont =0; cont<=v-1; cont ++){
 			if(nodos.get(cont)== idVertex){
-				nodos.get(cont).cambiarInfo(infoVertex);
+				nodos.get(cont).darElemento().cambiarInfo(infoVertex);
 			}
 		}
 	}
@@ -109,8 +110,8 @@ public class Graph<K,V,A> implements IGraph<K, V, A> {
 	 */
 	public A getInfoArc(K idVertexIni, K idVertexFin) {
 		for(int cont =0; cont<=e-1; cont ++){
-			if(arcos.get(cont).darVerticeOrigen()==idVertexIni&&arcos.get(cont).darVerticeDestino()==idVertexFin){
-				return arcos.get(cont).darInfoArco();
+			if(arcos.get(cont).darElemento().darVerticeOrigen()==idVertexIni&&arcos.get(cont).darElemento().darVerticeDestino()==idVertexFin){
+				return arcos.get(cont).darElemento().darInfoArco();
 			}
 		}
 		return null;
@@ -121,8 +122,8 @@ public class Graph<K,V,A> implements IGraph<K, V, A> {
 	 */
 	public void setInfoArc(K idVertexIni, K idVertexFin, A infoArc) {
 		for(int cont =0; cont<=e-1; cont ++){
-			if(arcos.get(cont).darVerticeOrigen()==idVertexIni&&arcos.get(cont).darVerticeDestino()==idVertexFin){
-				arcos.get(cont).setInf(infoArc);
+			if(arcos.get(cont).darElemento().darVerticeOrigen()==idVertexIni&&arcos.get(cont).darElemento().darVerticeDestino()==idVertexFin){
+				arcos.get(cont).darElemento().setInf(infoArc);
 			}
 		}		
 	}
@@ -133,13 +134,15 @@ public class Graph<K,V,A> implements IGraph<K, V, A> {
 	public ArrayList<K> adj(K idVertex) {
 		ArrayList<K> ret = new ArrayList<>();
 		for(int cont =0; cont<=v; cont ++){
-			if(arcos.get(cont).darVerticeDestino()==idVertex){
-				ret.add(arcos.get(cont).darVerticeOrigen());
+			if(arcos.get(cont).darElemento().darVerticeDestino()==idVertex){
+				ret.add(arcos.get(cont).darElemento().darVerticeOrigen());
 			}
-			if( arcos.get(cont).darVerticeOrigen()==idVertex){
-				ret.add(arcos.get(cont).darVerticeDestino());
+			if( arcos.get(cont).darElemento().darVerticeOrigen()==idVertex){
+				ret.add(arcos.get(cont).darElemento().darVerticeDestino());
 			}
 		}
 		return ret;
 	}
+
+	
 }
