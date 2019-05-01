@@ -144,5 +144,21 @@ public class Graph<K,V,A> implements IGraph<K, V, A> {
 		return ret;
 	}
 
+	public NodoLinkedList<Vertice<K,V>> getVertex(K idVertex) {
+		for(int cont =0; cont<=v-1; cont ++){
+			if(nodos.get(cont).darElemento().darID()== idVertex){
+				return nodos.get(cont);
+			}
+		}
+		return null;
+	}
+	
+	public LinkedList<Vertice<K, V>> darListaNodos(){
+		return nodos;
+	}
+	
+	public LinkedList<Arco<K, K, A>> darListaArcos(){
+		return arcos;
+	}
 	
 }

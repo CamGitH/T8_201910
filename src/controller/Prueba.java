@@ -6,6 +6,7 @@ import org.xml.sax.helpers.*;
 
 import model.estructuras.ArregloDinamico;
 import model.estructuras.Graph;
+import model.estructuras.NodoLinkedList;
 import model.estructuras.Vertecss;
 import model.estructuras.Vertice;
 
@@ -96,8 +97,11 @@ public class Prueba extends DefaultHandler {
 	
 	public <A, K, V> void creaArco(Graph<K, V, A> grafo, LinkedList<ArregloDinamico> listaArcos){
 		int tamano = listaArcos.size();
+		model.estructuras.LinkedList<Vertice<K, V>> nodos = grafo.darListaNodos();
 		for(int i =0; i<tamano;i++){
-			Vertice<K, V> idVertexIni = grafo.getInfoVertex(grafo.getInfoVertex(idVertex));
+			NodoLinkedList<Vertice<K, V>> idVertexIni = grafo.getVertex((K) listaArcos.get(i));
+			NodoLinkedList<Vertice<K, V>> idVertexFin = grafo.getVertex((K) listaArcos.get(i+1));
+			int infoArc = 
 			grafo.addEdge(idVertexIni, idVertexFin, infoArc);
 		}
 	}
