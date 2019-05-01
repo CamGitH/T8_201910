@@ -95,19 +95,22 @@ public class Prueba extends DefaultHandler {
 		}
 	}
 	
-	public <A, K, V> void creaArco(Graph<K, V, A> grafo, LinkedList<ArregloDinamico> listaArcos){
+	public <A, K, V> void creaArco(Graph<K, V, A> grafo, LinkedList<ArregloDinamico> listaArcos) throws Exception{
 		int tamano = listaArcos.size();
 		model.estructuras.LinkedList<Vertice<K, V>> nodos = grafo.darListaNodos();
 		for(int i =0; i<tamano;i++){
 			NodoLinkedList<Vertice<K, V>> idVertexIni = grafo.getVertex((K) listaArcos.get(i));
 			NodoLinkedList<Vertice<K, V>> idVertexFin = grafo.getVertex((K) listaArcos.get(i+1));
-			int infoArc = 
-			grafo.addEdge(idVertexIni, idVertexFin, infoArc);
+			A infoArc = (A) "0";
+			//TODO infoarc
+			grafo.addEdge(idVertexIni.darElemento().darID(), idVertexFin.darElemento().darID(), infoArc);
 		}
 	}
 	
-	public <K, V, A> Graph<K, V, A> crearGrafo(LinkedList<Vertecss> listaVertices,LinkedList<ArregloDinamico> listaArcos){
-		return null;
-		
+	public <K, V, A> Graph<Long, Double, Double> crearGrafo(LinkedList<Vertecss> listaVertices,LinkedList<ArregloDinamico> listaArcos) throws Exception{
+		Graph<Long, Double, Double> grafo = new Graph<>();
+		creaVertices(grafo, listaVertices);
+		creaArco(grafo, listaArcos);
+		return grafo;
 	}
 }
