@@ -81,6 +81,18 @@ public class Graph<K,V,A> implements IGraph<K, V, A> {
 	}
 
 	/*
+	 * retorna una lista con los arcos del vertice.
+	 */
+	public ArrayList<Arco<K, V, A>> darArcos(K idVertice){
+		ArrayList<Arco<K, V, A>> ret = new ArrayList<>();
+		for(int i =0; i<arcos.getSize();i++){
+			if(arcos.get(i).darElemento().darVerticeDestino()==idVertice || arcos.get(i).darElemento().darVerticeOrigen()==idVertice ){
+				ret.add((Arco<K, V, A>) arcos.get(i).darElemento());
+			}
+		}
+		return ret;
+	}
+	/*
 	 * Obtener la información de un vértice
 	 */
 	public V getInfoVertex(K idVertex) {
