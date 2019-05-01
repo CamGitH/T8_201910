@@ -22,9 +22,7 @@ public class Prueba extends DefaultHandler {
 
 	private LinkedList<Vertecss> listaVertices = new LinkedList<Vertecss>();
 
-	private LinkedList<ArregloDinamico> listaArcos  = new LinkedList<ArregloDinamico>();
-
-	private ArregloDinamico arrayLongs  = new ArregloDinamico<>(10);
+	private LinkedList<Queue> listaArcos  = new LinkedList<Queue>();
 	
 	private Queue<Long> cola = new Queue<Long>();
 
@@ -69,7 +67,7 @@ public class Prueba extends DefaultHandler {
 	public void endElement(String uri, String localName, String qName)
 			throws SAXException {
 		if(sirve){
-			listaArcos.add(arrayLongs);
+			listaArcos.add(cola);
 			for(int i = 0; i<cola.size();i++){
 				cola.dequeue();
 			}
