@@ -4,8 +4,6 @@ import java.util.ArrayList;
 import java.util.Iterator;
 
 public interface IGraph<K, V, A> {
-
-	void graph ( );
 	
 	int V();
 	
