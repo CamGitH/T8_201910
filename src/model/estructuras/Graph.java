@@ -43,7 +43,7 @@ public class Graph<K,V,A> implements IGraph<K, V, A> {
 	 * Adiciona un vértice con un Id único.
 	 * El vértice tiene la información InfoVertex
 	 */
-	public void addVertex(K idVertex, V infoVertex, V info2) throws Exception {
+	public void addVertex(K idVertex, V infoVertex) throws Exception {
 		if(v==0){
 			Vertice<K, V> a = new Vertice<>();
 			a.cambiarInfo(infoVertex);
@@ -51,6 +51,7 @@ public class Graph<K,V,A> implements IGraph<K, V, A> {
 			a.setId(idVertex);
 			v++;
 			raiz=a;
+			System.out.println(a);
 			nodos.add(a);
 			
 		}
@@ -171,4 +172,8 @@ public class Graph<K,V,A> implements IGraph<K, V, A> {
 		return arcos;
 	}
 	
+	public String toString(K idVertex){
+		Vertice<K, V> e = getVertex(idVertex);
+		return ("''"+e.darID()+"'':{ \n"+"''lat'':"+e.darInfo()+", \n"+"''lon'':"+e.darInfo()+"''adj'':"+adj(e.darID())+"\n }");
+	}
 }

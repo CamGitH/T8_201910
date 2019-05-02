@@ -30,11 +30,11 @@ public class GrafoTest<A, K, V> extends TestCase{
 		// Crear los vértices
 		try
 		{
-			grafo.addVertex(1, 1, 1);
-			grafo.addVertex(2, 2, 2);
-			grafo.addVertex(3, 3, 3);
-			grafo.addVertex(4, 4, 4);
-			grafo.addVertex(5, 5, 5);
+			grafo.addVertex(1, 1);
+			grafo.addVertex(2, 2);
+			grafo.addVertex(3, 3);
+			grafo.addVertex(4, 4);
+			grafo.addVertex(5, 5);
 		}
 		catch( Exception e )
 		{
@@ -57,14 +57,14 @@ public class GrafoTest<A, K, V> extends TestCase{
 		try
 		{
 			System.out.println(grafo.V());
-			grafo.addVertex(1, 1, 1);
+			grafo.addVertex(1, 1);
 			System.out.println(grafo.getInfoVertex(1)+",   " +grafo.V());
-			grafo.addVertex(2, 2, 2);
+			grafo.addVertex(2, 2);
 			System.out.println("sii");
-			grafo.addVertex(3, 3, 3);
-			grafo.addVertex(4, 4, 4);
+			grafo.addVertex(3, 3);
+			grafo.addVertex(4, 4);
 			System.out.println("aaa");
-			grafo.addVertex(5, 5, 5);
+			grafo.addVertex(5, 5);
 			System.out.println(grafo.getInfoVertex(1)+"");
 
 		}
@@ -105,7 +105,7 @@ public class GrafoTest<A, K, V> extends TestCase{
 
 		try
 		{
-			grafo.addVertex(7, 7, 7);
+			grafo.addVertex(7, 7);
 			grafo.addEdge(7, 2, 7);
 			grafo.addEdge(7, 3, 8);
 		}	
@@ -125,7 +125,7 @@ public class GrafoTest<A, K, V> extends TestCase{
 		// Ingresar un vertice repetido
 		try
 		{
-			grafo.addVertex(1, 1, 1);
+			grafo.addVertex(1, 1);
 			fail( "El vértice ingresado ya existe" );
 		}
 		catch( Exception e )
