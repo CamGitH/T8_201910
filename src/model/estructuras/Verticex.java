@@ -84,7 +84,7 @@ public class Verticex  <V extends Comparable<V>,K extends Comparable<K>,A>
 		{
 			if(infoVertex[hashCalculado]!=null)//no es requerido un else ya que los id son unicos
 			{
-				infoVertex[hashCalculado]=new Arcox();
+				infoVertex[hashCalculado]=new Arcox(pPeso, pLlave);
 				cargaInfoVertex++;
 			}
 		}
