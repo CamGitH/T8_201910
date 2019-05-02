@@ -1,17 +1,21 @@
 package controller;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.PrintWriter;
+import java.util.ArrayList;
 import java.util.Scanner;
 
 import com.google.gson.Gson;
 import com.google.gson.stream.JsonReader;
 
 import model.estructuras.Graph;
+import model.estructuras.LinkedList;
+import model.estructuras.Vertice;
 import view.View;
 
 public class Controller {
-
-
 
 	private View view;
 
@@ -69,44 +73,55 @@ public class Controller {
 		}
 
 	}
+	/**
+	 * Se hace un text con el formato JSON, que luego se usa para leer el grafo cambiando .txt por .json
+	 */
+	public void hacerJson(){
+		ArrayList<Vertice<Long, Object>> lista = new ArrayList<>();
+		lista = grafo.darListaNodos();
+		PrintWriter pw;
+		try {
+			pw = new PrintWriter(new FileWriter("grafo.txt"));
+			pw.write("{");
+			for (int i = 0; i < lista.size(); i++) {
+				pw.write(lista.get(i).toString());
+			}
+			pw.write("}");
+			pw.close();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		 
+	}
 
 
-	//	public void loadMovingViolations() {
-	//		Gson gson = new Gson();
-	//		JsonReader reader;
-	//
-	//		try {
-	//
-	//			reader = new JsonReader(new FileReader("./data/Moving_Violations_Issued_in_January_2018.json"));
-	//			readFiles(gson, reader);
-	//
-	//
-	//		} catch (FileNotFoundException e) {
-	//			e.printStackTrace();
-	//		}
-	//
-	//	}
+		public void loadGrafo() {
+			Gson gson = new Gson();
+			JsonReader reader;
+	
+			try {
+	
+				reader = new JsonReader(new FileReader("./grafo.json"));
+				readFiles(gson, reader);
+			} catch (FileNotFoundException e) {
+				e.printStackTrace();
+			}
+	
+		}
 
-	//	private void readFiles(Gson pGson, JsonReader pReader){
-	//		VOMovingViolation[] lista = pGson.fromJson(pReader, VOMovingViolation[].class);
-	//		System.out.println(lista.length);
-	//		for(int i = 0; i<lista.length;i++){
-	//			if(lista[i].getAddressID()==null){
-	//				continue;
-	//			}
-	//			else if(lista[i].getAccidentIndicator().equals("Yes")){
-	//
-	//				tablaLineal.put(lista[i].getAddressID(), lista[i]);
-	//				tablaChaning.put(lista[i].getAddressID(), lista[i]);
-	//				while(i<10000){
-	//					tablaChaningMuestra.put(lista[i].getAddressID(), lista[i]);
-	//					tablaLinealMuestra.put(lista[i].getAddressID(), lista[i]);
-	//				}
-	//
-	//			}
-	//		}
-	//		System.out.println("-------------------");
-	//	}
+		private void readFiles(Gson pGson, JsonReader pReader){
+			
+	
+			Vertice[] lista = pGson.fromJson(pReader, Vertice[].class);
+			System.out.println(lista.length);
+			for(int i = 0; i<lista.length;i++){
+				Vertice
+				grafo.addVertex(lista[i].darID(), lista[i].darInfo());
+			}
+			System.out.println("-------------------");
+			
+			
+		}
 }
 
 
