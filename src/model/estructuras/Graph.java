@@ -13,7 +13,7 @@ public class Graph<K,V,A> implements IGraph<K, V, A> {
 	int e;
 
 	ArrayList<Vertice<K, V>> nodos = new ArrayList<>();
-
+	//Vertice<K, V>[] nodos = null;
 	ArrayList<Arco<K, K, A>> arcos = new ArrayList<>();
 
 
@@ -53,6 +53,7 @@ public class Graph<K,V,A> implements IGraph<K, V, A> {
 			raiz=a;
 			System.out.println(a);
 			nodos.add(a);
+			//........nodos.add(a)........
 			
 		}
 		else{
@@ -64,6 +65,7 @@ public class Graph<K,V,A> implements IGraph<K, V, A> {
 		a.setId(idVertex);
 		v++;	
 		nodos.add(a);
+		//........nodos.add(a)........
 		}
 	}
 
