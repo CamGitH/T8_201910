@@ -12,9 +12,9 @@ public class Graph<K,V,A> implements IGraph<K, V, A> {
 	//numero de arcos
 	int e;
 
-	LinkedList<Vertice<K, V>> nodos = new LinkedList<>();
+	ArrayList<Vertice<K, V>> nodos = new ArrayList<>();
 
-	LinkedList<Arco<K, K, A>> arcos = new LinkedList<>();
+	ArrayList<Arco<K, K, A>> arcos = new ArrayList<>();
 
 
 	/*
@@ -47,7 +47,7 @@ public class Graph<K,V,A> implements IGraph<K, V, A> {
 		if(v==0){
 			Vertice<K, V> a = new Vertice<>();
 			a.cambiarInfo(infoVertex);
-			a.cambiarInfo2(info2);
+			//a.cambiarInfo2(info2);
 			a.setId(idVertex);
 			v++;
 			raiz=a;
@@ -85,9 +85,9 @@ public class Graph<K,V,A> implements IGraph<K, V, A> {
 	 */
 	public ArrayList<Arco<K, V, A>> darArcos(K idVertice){
 		ArrayList<Arco<K, V, A>> ret = new ArrayList<>();
-		for(int i =0; i<arcos.getSize();i++){
-			if(arcos.get(i).darElemento().darVerticeDestino()==idVertice || arcos.get(i).darElemento().darVerticeOrigen()==idVertice ){
-				ret.add((Arco<K, V, A>) arcos.get(i).darElemento());
+		for(int i =0; i<arcos.size();i++){
+			if(arcos.get(i).darVerticeDestino()==idVertice || arcos.get(i).darVerticeOrigen()==idVertice ){
+				ret.add( (Arco<K, V, A>) arcos.get(i));
 			}
 		}
 		return ret;
@@ -97,8 +97,8 @@ public class Graph<K,V,A> implements IGraph<K, V, A> {
 	 */
 	public V getInfoVertex(K idVertex) {
 		for(int cont =0; cont<=v-1; cont ++){
-			if(nodos.get(cont).darElemento().darID()== idVertex){
-				return nodos.get(cont).darElemento().darInfo();
+			if(nodos.get(cont).darID()== idVertex){
+				return nodos.get(cont).darInfo();
 			}
 		}
 		return null;
@@ -110,7 +110,7 @@ public class Graph<K,V,A> implements IGraph<K, V, A> {
 	public void setInfoVertex(K idVertex, V infoVertex) {
 		for(int cont =0; cont<=v-1; cont ++){
 			if(nodos.get(cont)== idVertex){
-				nodos.get(cont).darElemento().cambiarInfo(infoVertex);
+				nodos.get(cont).cambiarInfo(infoVertex);
 			}
 		}
 	}
@@ -120,8 +120,8 @@ public class Graph<K,V,A> implements IGraph<K, V, A> {
 	 */
 	public A getInfoArc(K idVertexIni, K idVertexFin) {
 		for(int cont =0; cont<=e-1; cont ++){
-			if(arcos.get(cont).darElemento().darVerticeOrigen()==idVertexIni&&arcos.get(cont).darElemento().darVerticeDestino()==idVertexFin){
-				return arcos.get(cont).darElemento().darInfoArco();
+			if(arcos.get(cont).darVerticeOrigen()==idVertexIni&&arcos.get(cont).darVerticeDestino()==idVertexFin){
+				return arcos.get(cont).darInfoArco();
 			}
 		}
 		return null;
@@ -132,8 +132,8 @@ public class Graph<K,V,A> implements IGraph<K, V, A> {
 	 */
 	public void setInfoArc(K idVertexIni, K idVertexFin, A infoArc) {
 		for(int cont =0; cont<=e-1; cont ++){
-			if(arcos.get(cont).darElemento().darVerticeOrigen()==idVertexIni&&arcos.get(cont).darElemento().darVerticeDestino()==idVertexFin){
-				arcos.get(cont).darElemento().setInf(infoArc);
+			if(arcos.get(cont).darVerticeOrigen()==idVertexIni&&arcos.get(cont).darVerticeDestino()==idVertexFin){
+				arcos.get(cont).setInf(infoArc);
 			}
 		}		
 	}
@@ -144,30 +144,30 @@ public class Graph<K,V,A> implements IGraph<K, V, A> {
 	public ArrayList<K> adj(K idVertex) {
 		ArrayList<K> ret = new ArrayList<>();
 		for(int cont =0; cont<=v; cont ++){
-			if(arcos.get(cont).darElemento().darVerticeDestino()==idVertex){
-				ret.add(arcos.get(cont).darElemento().darVerticeOrigen());
+			if(arcos.get(cont).darVerticeDestino()==idVertex){
+				ret.add(arcos.get(cont).darVerticeOrigen());
 			}
-			if( arcos.get(cont).darElemento().darVerticeOrigen()==idVertex){
-				ret.add(arcos.get(cont).darElemento().darVerticeDestino());
+			if( arcos.get(cont).darVerticeOrigen()==idVertex){
+				ret.add(arcos.get(cont).darVerticeDestino());
 			}
 		}
 		return ret;
 	}
 
-	public NodoLinkedList<Vertice<K,V>> getVertex(K idVertex) {
+	public Vertice<K, V> getVertex(K idVertex) {
 		for(int cont =0; cont<=v-1; cont ++){
-			if(nodos.get(cont).darElemento().darID()== idVertex){
+			if(nodos.get(cont).darID()== idVertex){
 				return nodos.get(cont);
 			}
 		}
 		return null;
 	}
 	
-	public LinkedList<Vertice<K, V>> darListaNodos(){
+	public ArrayList<Vertice<K, V>> darListaNodos(){
 		return nodos;
 	}
 	
-	public LinkedList<Arco<K, K, A>> darListaArcos(){
+	public ArrayList<Arco<K, K, A>> darListaArcos(){
 		return arcos;
 	}
 	

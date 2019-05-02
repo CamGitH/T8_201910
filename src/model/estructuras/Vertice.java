@@ -4,16 +4,15 @@ public class Vertice<K, V> {
 
 	private K id;
 	private V infoVertice;
-	private V info2;
 	boolean marcado;
 	int numeroArcos =0;
 	
-	public void vertice( K pId , V pInfoVertice, V pinfo2)
+	public void vertice( K pId , V pInfoVertice)
 	{
 	id = pId;
 	numeroArcos=0;
 	infoVertice = pInfoVertice;
-	info2 = pinfo2;
+//	info2 = pinfo2;
 	marcado = false;
 	}
 	
@@ -25,17 +24,17 @@ public class Vertice<K, V> {
 		return infoVertice;
 	}
 	
-	public V darInfo2(){
-		return info2;
-	}
+//	public V darInfo2(){
+//		return info2;
+//	}
 	
 	public void cambiarInfo(V pInf){
 		infoVertice = pInf;
 	}
 	
-	public void cambiarInfo2(V pInf){
-		info2 = pInf;
-	}
+//	public void cambiarInfo2(V pInf){
+//		info2 = pInf;
+//	}
 	
 	public void setId(K pId){
 		id = pId;

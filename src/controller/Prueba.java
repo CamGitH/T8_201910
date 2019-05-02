@@ -100,21 +100,22 @@ public class Prueba extends DefaultHandler {
 	}
 
 	public <A, K, V> void creaArcos() throws Exception{
-		model.estructuras.LinkedList<Vertice<K, V>> nodos = grafo.darListaNodos();
+		ArrayList nodos = grafo.darListaNodos();
 		for(int i =0; i<listaArcos.size();i++){
-			NodoLinkedList<Vertice<K, V>> idVertexIni = grafo.getVertex((K) listaArcos.get(i));
-			NodoLinkedList<Vertice<K, V>> idVertexFin = grafo.getVertex((K) listaArcos.get(i+1));
+			Vertice<K, V> idVertexIni = grafo.getVertex(listaArcos.get(i));
+			
+			Vertice<K, V> idVertexFin = grafo.getVertex(listaArcos.get(i+1));
 			A infoArc = (A) "0";
 			//TODO infoarc
-			grafo.addEdge(idVertexIni.darElemento().darID(), idVertexFin.darElemento().darID(), infoArc);
+			grafo.addEdge(idVertexIni.darID(), idVertexFin.darID(), infoArc);
 		}
 	}
 
 	public <K, V, A> Graph<Long, Double, Double> crearGrafo() throws Exception{
 		creaVertices();
 		creaArcos();
-		System.out.println(grafo.darListaArcos().getSize());
-		System.out.println(grafo.darListaNodos().getSize());
+		System.out.println(grafo.darListaArcos().size());
+		System.out.println(grafo.darListaNodos().size());
 		return grafo;
 	}
 }
