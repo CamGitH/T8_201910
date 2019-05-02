@@ -1,6 +1,6 @@
 package model.estructuras;
 
-public class Arcox extends Comparable<K>,A>
+public class Arcox<K,A>
 {
 
 	//Atributos
@@ -19,7 +19,7 @@ public class Arcox extends Comparable<K>,A>
 	 * @param pPeso peso del arco
 	 * @param pLlave llave id del vertice adyacente
 	 */
-	public Arco (A pPeso, K pLlave)
+	public Arcox (A pPeso, K pLlave)
 	{
 		//se inicializan los atributos del arco
 		llaveId=pLlave;
