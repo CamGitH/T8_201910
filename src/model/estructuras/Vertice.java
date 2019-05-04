@@ -55,4 +55,10 @@ public class Vertice<K, V> {
 	public void desMarcar(){
 		marcado=false;
 	}
+	
+	public String ToString(){
+		String x = "";
+		
+		return x;
+	}
 }

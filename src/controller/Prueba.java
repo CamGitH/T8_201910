@@ -1,11 +1,11 @@
 package controller;
 
 import javax.xml.parsers.*;
+
 import org.xml.sax.*;
 import org.xml.sax.helpers.*;
 
 import model.estructuras.ArregloDinamico;
-import model.estructuras.Grafox;
 import model.estructuras.Graph;
 import model.estructuras.NodoLinkedList;
 import model.estructuras.Queue;
@@ -29,6 +29,10 @@ public class Prueba extends DefaultHandler {
 
 	private Graph grafo = new Graph<>();
 
+	private int v;
+
+	private int e;
+
 	public Prueba() {
 		super();
 	}
@@ -45,11 +49,10 @@ public class Prueba extends DefaultHandler {
 		xmlReader.parse(filename);
 	}
 
-	public void startDocument() throws SAXException {
-
-	}
-
 	boolean sirve;
+	public void startDocument() throws SAXException {
+		sirve = false;
+	}
 
 	@Override
 	public void startElement(String namespaceURI, String localName, String qName, Attributes atts) throws SAXException {
@@ -58,71 +61,88 @@ public class Prueba extends DefaultHandler {
 			long x = Long.parseLong(atts.getValue(0));
 			cola.enqueue(x);
 		}
-		if(qName.equals("tag")&&atts.getValue(0).equals("highway")){
-			sirve = true;
-		}
 
+			if(qName.equals("tag")&&atts.getValue(0).equals("highway")){
+				emptyStack();
+			}
+		
 		if(qName.equals("node")){
 			Vertecss vertice = new Vertecss(Double.parseDouble(atts.getValue(1)), Double.parseDouble(atts.getValue(2)), Long.parseLong(atts.getValue(0)));
 			listaVertices.add(vertice);
 		}
 	}
 
+	public void emptyStack(){
+		if(!cola.isEmpty()){
+			listaArcos.add(cola);
+			for(int i = 0; i<cola.size();i++){
+				long d = cola.dequeue();
+			}
+		}
+	}
+	
 	@Override
 	public void endElement(String uri, String localName, String qName)
 			throws SAXException {
-		if(sirve){
-			listaArcos.add(cola);
-			for(int i = 0; i<cola.size();i++){
-				cola.dequeue();
-			}
-		}
-		sirve = false;
+//		if(sirve){
+//			if(!cola.isEmpty()){
+//				listaArcos.add(cola);
+//				for(int i = 0; i<cola.size();i++){
+//					cola.dequeue();
+//				}
+//			}
+//		}
+//		sirve = false;
 	}
 
 	public void endDocument() throws SAXException {
-		System.out.println("Arcos"+listaArcos.size());
-		System.out.println("Vertices"+listaVertices.size()+"\n");
-		//		System.out.println(listaVertices.getLast().getId());
-		//		System.out.println(listaVertices.getLast().getLatitud());
-		//		System.out.println(listaVertices.getLast().getLongitud()+"\n");
-		//		System.out.println(listaArcos.getFirst().darElemento(0));
+
+		try {
+			creaVertices();
+			creaArcos();
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 
 	}
 
 	public void creaVertices() throws Exception{
 		for(int i = 0; i<listaVertices.size();i++){
-			grafo.addVertex(listaVertices.get(i).getId(), listaVertices.get(i).getLatitud(), listaVertices.get(i).getLongitud());
+			//System.out.println("#1::"+i);
+			grafo.addVertex(listaVertices.get(i).getId(), listaVertices.get(i));
 		}
-
 	}
 
 	public <A, K, V> void creaArcos() throws Exception{
 		long primero = 0;
 		long segundo = 0;
+		int c = 0;
 		for(int i =0; i<listaArcos.size();i++){
+			System.out.println("#2:"+i);
 			Queue<Long> cola = listaArcos.get(i);
-			primero =  cola.dequeue();
-			while(!cola.isEmpty()){
-				
-				segundo = cola.dequeue();
-				
-				if(primero!=0 && segundo!=0){
-					grafo.addEdge(primero, segundo, 1);
-				}
-				primero = segundo;
-				if(!cola.isEmpty()){
+			c+= cola.size();
+			if(!cola.isEmpty()){
+				primero =  cola.dequeue();
+				while(!cola.isEmpty()){
+
 					segundo = cola.dequeue();
+
+					if(segundo!=0){
+						grafo.addEdge(primero, segundo, 1);
+					}
+					primero = segundo;
+					if(!cola.isEmpty()){
+						segundo = cola.dequeue();
+					}
 				}
 			}
 		}
+		System.out.println("c"+c);
+		System.out.println(grafo.darListaArcos().size());
 	}
 
 	public <K, V, A> Graph<Long, Double, Double> crearGrafo() throws Exception{
-		creaVertices();
-		creaArcos();
-		System.out.println(grafo.darListaArcos().size());
-		System.out.println(grafo.darListaNodos().size());
 		return grafo;
 	}
 }

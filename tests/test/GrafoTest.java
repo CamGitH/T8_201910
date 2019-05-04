@@ -56,16 +56,12 @@ public class GrafoTest<A, K, V> extends TestCase{
 		// Crear los vértices
 		try
 		{
-			System.out.println(grafo.V());
 			grafo.addVertex(1, 1);
-			System.out.println(grafo.getInfoVertex(1)+",   " +grafo.V());
 			grafo.addVertex(2, 2);
-			System.out.println("sii");
 			grafo.addVertex(3, 3);
 			grafo.addVertex(4, 4);
-			System.out.println("aaa");
 			grafo.addVertex(5, 5);
-			System.out.println(grafo.getInfoVertex(1)+"");
+			
 
 		}
 		catch( Exception e )
